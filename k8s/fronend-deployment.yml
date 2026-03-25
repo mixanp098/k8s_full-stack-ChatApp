@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  namespace: chat-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  templates:
+    metadata:
+      name: frontend-pod
+      namespace: chat-app
+      labels:    
+        app: frontend
+    spec:
+      container:
+        name: chatapp-frontend
+        image: mixanp098/k8s-chat-app:frontend-v1.15
+        ports:
+        - containerPort: 80
+        env:
+        - name: NODE_ENV
+        value: production
